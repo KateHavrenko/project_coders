@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: rgba(24, 51, 123, 0.99);
+    color: #fff;
     font-family: 'Nova Mono', monospace;
 }
 
@@ -14,18 +15,17 @@ body {
   }
 
 header {
-    transition: all 0.5s ease;
+    position: relative;
+    z-index: 5;
     background-color:  rgba(24, 51, 123, 0.7);
     -webkit-transition: all 1s ease;
-    /* -moz-transition: position 10s;
-    -ms-transition: position 10s;
-    -o-transition: position 10s; */
     transition: all 1s ease;
 }
 
 .sticky {
     width: 100%;
     position: fixed;
+    z-index: 50;
     top: 0;
     animation: smoothScroll 1s forwards;
 }
@@ -34,6 +34,7 @@ header {
     width: 100%;
     max-width: 1150px;
     margin: 0 auto;
+    padding: 0px 15px;
 }
 
 header .container {
@@ -112,16 +113,44 @@ header li a:hover {
     transform: translateX(5px);
 }
 
-#information {
-    height: 1200px;
+section {
     margin-top: 30px;
     padding-top: 20px;
+}
+
+section h2 {
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+}
+
+section h2:after {
+    content: "";
+    height: 2px;
+    width: 300px;
+    background-color: #fff;
+    margin-left: 5px;
+}
+
+#information {
+    position: relative;
+    top: -110px;
+    background-image: url("img/coding3.jpeg");
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: 0% 30%;
+    height: 100vh;
+    overflow: auto;
 }
 
 #information .name {
     color: #b7b2dc;
     font-size: 16px;
     font-family: 'Nova Mono', monospace;
+}
+
+#information  .container {
+   margin-top: 100px;
 }
 
 #information .name-main {
@@ -138,3 +167,262 @@ header li a:hover {
     font-size: larger;
     font-weight: 200;
 }
+
+#work .codewars img,
+#work .github img,
+#work .freecodecamp img {
+    width: 60%;
+    height: auto;
+    -webkit-transition: all 1s ease;
+    transition: all 0.15s ease;
+}
+
+#work{
+    /* align-self: flex-end; */
+    color: #fff;
+}
+
+#work .github {
+    text-align: right;
+}
+
+#work .codewars img:hover,
+#work .github img:hover,
+#work .freecodecamp img:hover {
+    -webkit-box-shadow: 0px 0px 0px 5px rgba(255,210,4,1);
+    -moz-box-shadow: 0px 0px 0px 5px rgba(255,210,4,1);
+    box-shadow: 0px 0px 0px 5px rgba(255,210,4,1);
+}
+
+#work .codewars:hover,
+#work .github:hover,
+#work .freecodecamp:hover{
+    z-index: 10;
+}
+
+#work .codewars,
+#work .github,
+#work .freecodecamp {
+    position: relative;
+    z-index: 1;
+}
+
+#work .github{
+    top: -100px;
+}
+
+#work .freecodecamp {
+    top: -200px;
+}
+
+.title-links {
+    display: inline-block;
+}
+
+#work  div  a {
+    display: block;
+}
+
+.title-links:after {
+    background-color: #ffeb3b;
+    display: block;
+    content: "";
+    height: 2px;
+    width: 0%;
+    -webkit-transition: width .3s ease-in-out;
+    -moz--transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+}
+.title-links:hover:after,
+.title-links:focus:after {
+    width: 100%;
+}
+
+#experience .wrap-flex {
+    display: flex; 
+}
+
+#experience h3{
+    text-align: center;
+    padding: 3px;
+    border-left: 2px dashed transparent;
+    border-bottom: 2px dashed transparent;
+    border-right: 2px dashed transparent;
+}
+
+#experience h3.current {
+    border-left: 2px dashed #ffd204;
+    border-bottom: 2px dashed #ffd204;
+    border-right: 2px dashed #ffd204;
+}
+
+#experience .experience-items-description p{
+    margin-left: 30px;
+    display: none;
+}
+
+
+#experience .experience-items-description p.current{
+    display: block;
+}
+
+#experience h3:hover {
+    cursor: pointer;
+}
+
+
+/*--carousel--*/
+
+/* 
+.slider-container {
+    max-width: 1000px;
+    width: 100%;
+    position: relative;
+    margin: auto;
+} */
+
+.gallery-container {
+    /* max-width: 1000px; */
+    width: 100%;
+    position: relative;
+    margin: auto;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* .my {
+    display: none;
+}
+
+.mySlides.active {
+    display: block;
+} */
+
+.gallery-item {
+    display: none;
+    transition: all ease-in 2s;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.gallery-item.active {
+    display: block;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.prev {
+    left: 0px;
+}
+
+.next {
+    right: 0px;
+}
+
+.prev, .next {
+    visibility: hidden;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 23px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    transition: all linear 0.15s;
+}
+
+
+.gallery-container:hover .prev,
+.gallery-container:hover .next {
+    visibility: visible;
+}
+
+.gallery-container .prev {
+    left: 5px;
+}
+
+.gallery-container:hover .next {
+    right: 5px;
+}
+  
+  /* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+background-color: rgba(0,0,0,0.8);
+}
+  
+.hidden {
+    display: none;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    margin: 2px;
+}
+
+.dot.active {
+    background-color: #fff;
+}
+
+.dots-container {
+    display: flex;
+    position: relative;
+    bottom: 45px;
+    justify-content: center;
+}
+
+.controls .pause {
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border-radius: 1px;
+}
+
+.controls .play {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent #fff;
+}
+
+.controls {
+    display: flex;
+    position: relative;
+    bottom: 65px;
+    justify-content: flex-end;
+    padding-right: 25px;
+    cursor: pointer;
+}
+
+.controls div {
+    margin: 5px;
+}
+
+
+/*---Adaptive rools---*/
+
