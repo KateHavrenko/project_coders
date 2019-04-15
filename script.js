@@ -2,15 +2,15 @@
 
 var stickyHeader = document.querySelector('header');
 
-window.addEventListener('scroll', function(e) {
-   if (scrollY > 100 ) {
-        stickyHeader.classList.add('sticky');
-   } else {
-    stickyHeader.classList.remove('sticky');
-   }
-})
+// window.addEventListener('scroll', function(e) {
+//    if (scrollY > 100 ) {
+//         stickyHeader.classList.add('sticky');
+//    } else {
+//     stickyHeader.classList.remove('sticky');
+//    }
+// })
 
-// smooth moving to anchor
+//smooth moving to anchor
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -22,25 +22,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
-
-
-// var itemsExperiense = document.querySelectorAll(".experience-items h3");
-
-// for (let i = 0; i < itemsExperiense.length; i++)  {
-//     itemsExperiense[i].addEventListener('click', function(){
-//         removeClass();
-//         var activeClass = this.className;
-//         document.querySelector("p." + this.className).classList.add('current');
-//         this.classList.add('current');
-//     })
-// }
-
-// function removeClass() {
-//     var removeItemsClass =  document.querySelectorAll('.current');
-//     for (let i = 0; i < removeItemsClass.length; i++)  {
-//         removeItemsClass[i].classList.remove('current');
-//     }
-// }
 
 function getSlides() {
     return document.querySelectorAll('.gallery-item');
@@ -58,37 +39,47 @@ var n = 0;
 
 updateButtonsVisibility(n);
 
+//move to right slide
 
 function showSlideRight() {
-    let slides = getSlides();
-    let dots = getDots();
-    slides[n].classList.add("active");
-    dots[n].classList.add("active");
-    if (n < slides.length - 1) {
-        slides[n].classList.remove("active");
-        slides[n + 1].classList.add("active");
-        dots[n].classList.remove("active");
-        dots[n + 1].classList.add("active");
+    if (n < getSlides().length - 1) {
+        showSlide(n, n + 1);
         n++;
+    } else {
+        showSlide(n, 0);
+        n = 0;
     }
     updateButtonsVisibility(n);
-
 }
+
+//move to left slide
 
 function showSlideLeft() {
-    let slides = getSlides();   
-    slides[n].classList.add("active");
-    let dots = getDots();
-    dots[n].classList.add("active");
-    if (n >= 1) {
-        slides[n].classList.remove("active");
-        slides[n - 1].classList.add("active");
-        dots[n].classList.remove("active");
-        dots[n - 1].classList.add("active");
-        n--;
+    if (n == 0) {
+       let last = getSlides.length - 1;
+       showSlide(0, last);
+       n = last;
+    } else {
+       showSlide(n, n - 1);
+       n--;
     }
     updateButtonsVisibility(n);
 }
+
+//switch slide with arrows left/right
+
+function pressArrows(e){
+    key= window.event? event.keyCode: e.keyCode;
+    if (key == 37) {
+        showSlideLeft();
+    }    else if (key == 39) {
+        showSlideRight();
+    }
+}
+
+document.onkeydown = pressArrows;
+
+//update navigation arrows
 
 function updateButtonsVisibility(active) {
     let slides = getSlides();
@@ -100,61 +91,57 @@ function updateButtonsVisibility(active) {
     } else {
         prev.classList.remove('hidden');
     }
-
-    if (active == slides.length - 1) {
-        next.classList.add('hidden');
-    } else {
-        next.classList.remove('hidden');
-    }
 }
 
+var idInterval;
 
-(function() {
-    setInterval(function () {
-        showSlideRight()
+
+//slide gallery using conrtols buttons
+
+document.querySelector('.play').addEventListener('click', function(){
+    idInterval = setInterval(function () {
+        showSlideRight();
     }, 2000);
- })();
+})
 
-const numItemsToGenerate = 1; //how many gallery items you want on the screen
-const numImagesAvailable = 10; //how many total images are in the collection you are pulling from
-const imageWidth = 600; //your desired image width in pixels
-const imageHeight = 600; //desired image height in pixels
-const collectionID = 'Ukraine'; //the collection ID from the original url
-const $galleryContainer = document.querySelector('.gallery-container');
+document.querySelector('.pause').addEventListener('click', function(){
+    window.clearInterval(idInterval);
+})
 
-function renderGalleryItem(randomNumber) {
-    let baseUrl = 'https://api.unsplash.com/search/photos?page=1&query=ukraine/';
+//rendering images using Unsplash API
+
+const galleryContainer = document.querySelector('.gallery-container');
+
+function renderGalleryItem() {
+    let baseUrl = 'https://api.unsplash.com/collections/3284053/photos/';
     let accessKey = '3433e42b2d3f41b12c7c502fa3ca1898adc07a08124450e62bcef7564510cffe';
-    let url = `${baseUrl}&client_id=${accessKey}&`;
+    let url = `${baseUrl}?client_id=${accessKey}&`;
 
     fetch(url).then((response) => {
         response.json().then(function (data) {
-            let imgArray = data.results;
-            for (let j = 0; j < imgArray.length; j++) {
+            let imgArray = data;
+            for (let j = 2; j < imgArray.length; j++) {
                 let galleryItem = document.createElement('div');
                 galleryItem.classList.add('gallery-item');
                 let img = document.createElement('img');
                 img.classList.add('gallery', 'item');
                 img.src = imgArray[j].urls.full;
                 galleryItem.appendChild(img);
-                if (j == 0) {
+                if (j == 2) {
                     galleryItem.classList.add('active');
                 }
-                $galleryContainer.appendChild(galleryItem);
+                galleryContainer.appendChild(galleryItem);
             }
-            dots();
+            createDots();
+            addButtonListener();
         });
     })
 }
 
+renderGalleryItem();
 
-renderGalleryItem(0, true)
-for(let i = 1; i < numItemsToGenerate; i++) {
-  let randomImageIndex = Math.floor(Math.random() * numImagesAvailable);
-  renderGalleryItem(randomImageIndex, false);
-}
-
-function dots() {
+// create navigations dots
+function createDots() {
     let numberDots = document.querySelectorAll('.gallery-item');
     for (let i = 0; i < numberDots.length; i++) {
         let dot = document.createElement('div');
@@ -167,5 +154,28 @@ function dots() {
     }
 };
 
+//slide gallery with navigations dots
 
+function addButtonListener() { 
+    let buttons = document.querySelectorAll('.dot'); 
+    let listener = function(e) {
+        showSlide(n, e.target.index);
+        n = e.target.index;
+    };
+    for (let j = 0; j < buttons.length; j++) { 
+        buttons[j].index = j; 
+        buttons[j].addEventListener("click", listener);
+    }
+}
+
+//function that switchs slides
+
+function showSlide(prev, next) {
+    let slides = getSlides();
+    let dots = getDots();
+    slides[prev].classList.remove('active');
+    dots[prev].classList.remove('active');
+    slides[next].classList.add('active');
+    dots[next].classList.add('active');
+}
 

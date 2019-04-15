@@ -271,6 +271,75 @@ section h2:after {
 }
 
 
+/*---about_me---*/
+
+#about_me .container {
+    /* font-size: 0; */
+    white-space: nowrap;
+}
+
+#about_me .container > div {
+    position: relative;
+    display: inline-block;
+    max-width: 33%;
+    height: 100%;
+    padding: 10px;
+}
+
+#about_me .container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 5px -85px;
+}
+
+#about_me .container .wrapper-photo {
+    cursor: pointer;
+    height: 400px;
+}
+
+#about_me .container .wrapper-photo:hover .text {
+    opacity: 1;;
+}
+
+#about_me .container .inner-text {
+    display: flex;
+    padding: 15px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #fff;
+    opacity: 0.9;
+    white-space: pre-line;
+}
+
+#about_me .container .text {
+    padding: 25px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: opacity 1.5s ease 0.2s;
+    opacity: 0;
+}
+
+#about_me .text p{
+    display: flex;
+    align-self: center;
+    color: rgba(24, 51, 123, 0.99);
+}
+
+
+
+
 /*--carousel--*/
 
 /* 
@@ -391,7 +460,7 @@ background-color: rgba(0,0,0,0.8);
 .dots-container {
     display: flex;
     position: relative;
-    bottom: 45px;
+    bottom: 40px;
     justify-content: center;
 }
 
@@ -413,7 +482,7 @@ background-color: rgba(0,0,0,0.8);
 .controls {
     display: flex;
     position: relative;
-    bottom: 65px;
+    bottom: 85px;
     justify-content: flex-end;
     padding-right: 25px;
     cursor: pointer;
@@ -426,3 +495,43 @@ background-color: rgba(0,0,0,0.8);
 
 /*---Adaptive rools---*/
 
+@media screen and (max-width: 400px) {
+    header .logo {
+      display: none;
+    }
+}
+
+
+@media screen and (max-width: 750px) {
+    #work .codewars img, 
+    #work .github img, 
+    #work .freecodecamp img {
+      width: 100%;
+    }
+    
+    #work div {
+        text-align: center;
+    }
+
+    #work .github,
+    #work .freecodecamp {
+        top: 0px;
+    }
+
+    #work .github {
+        text-align: center;
+    }
+
+    section h2:after {
+        display: none;
+    }
+
+    #information {
+        top: 0px;
+    }
+
+    #about_me .container .wrapper-photo {
+        display: block;
+        max-width: 100%;
+    }
+}
