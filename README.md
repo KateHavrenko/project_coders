@@ -3,7 +3,7 @@ Project for founders and coders course
 
 ---
 
-This is my aplication page for **Founders and Coders** course.
+This is my aplication page for ***Founders and Coders** course.
 
 I've made all prerequisites:
     * Complete FreeCodeCamp
@@ -14,6 +14,6 @@ Top this link <https://katehavrenko.github.io/project_coders/> to see website pa
 
 ---
 
-I used *HTML*, *CSS*, and *Vanilla Javasript*. Also I used Unsplash API to generate images to my gallery. 
+I used **HTML**, **CSS**, and **Vanilla Javasript**. Also I used **Unsplash API** to generate images to my gallery. 
 
 
