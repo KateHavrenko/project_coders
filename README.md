@@ -7,11 +7,11 @@ This is my aplication page for ***Founders and Coders** course.
 
 I've made all prerequisites:
 
-    * Complete FreeCodeCamp
+* Complete FreeCodeCamp
 
-    * Reach 5 kyu and got more than 300 points on Codewars
+* Reach 5 kyu and got more than 300 points on Codewars
 
-    * Create webpage there you can see links to these resourses and carousel
+* Create webpage there you can see links to these resourses and carousel
 
 
 Top this link <https://katehavrenko.github.io/project_coders/> to see website page.
