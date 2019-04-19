@@ -49,12 +49,7 @@ header .logo {
     font-size: 20px;
     color: #fff;
     cursor: pointer;
-    /* transition: padding 1s ease-in-out; */
 }
-
-/* header .logo p:hover span{
-    transition: left 3s ease-in;
-} */
 
 header  nav {
     display: flex; 
@@ -80,7 +75,6 @@ header nav li {
     font-family: 'Nova Mono', monospace;
 }
 
-
 header li a {
     display: inline-block;
     color: #fff;
@@ -101,21 +95,12 @@ header li a:hover {
     transition: all .15s ease-in-out;
 }
 
-/* .logo p:hover span {
-    position: relative;
-} */
-
 .logo:hover .left-brakes {
     transform: translateX(-5px);
 }
 
 .logo:hover .right-brakes {
     transform: translateX(5px);
-}
-
-section {
-    margin-top: 30px;
-    padding-top: 20px;
 }
 
 section h2 {
@@ -134,7 +119,7 @@ section h2:after {
 
 #information {
     position: relative;
-    top: -110px;
+    top: -80px;
     background-image: url("img/coding3.jpeg");
     background-repeat: no-repeat;
     background-origin: content-box;
@@ -178,7 +163,7 @@ section h2:after {
 }
 
 #work{
-    /* align-self: flex-end; */
+    margin-top: 30px;
     color: #fff;
 }
 
@@ -256,13 +241,12 @@ section h2:after {
     border-right: 2px dashed #ffd204;
 }
 
-#experience .experience-items-description p{
+#experience .experience-items-description p {
     margin-left: 30px;
     display: none;
 }
 
-
-#experience .experience-items-description p.current{
+#experience .experience-items-description p.current {
     display: block;
 }
 
@@ -273,8 +257,11 @@ section h2:after {
 
 /*---about_me---*/
 
+#about_me {
+    margin-top: -100px;
+}
+
 #about_me .container {
-    /* font-size: 0; */
     white-space: nowrap;
 }
 
@@ -282,8 +269,7 @@ section h2:after {
     position: relative;
     display: inline-block;
     max-width: 33%;
-    height: 100%;
-    padding: 10px;
+    padding: 0;
 }
 
 #about_me .container img {
@@ -337,21 +323,13 @@ section h2:after {
     color: rgba(24, 51, 123, 0.99);
 }
 
-
-
-
 /*--carousel--*/
 
-/* 
-.slider-container {
-    max-width: 1000px;
-    width: 100%;
-    position: relative;
-    margin: auto;
-} */
+#slider {
+    margin-top: 120px;
+}
 
 .gallery-container {
-    /* max-width: 1000px; */
     width: 100%;
     position: relative;
     margin: auto;
@@ -360,14 +338,6 @@ section h2:after {
 * {
     box-sizing: border-box;
 }
-
-/* .my {
-    display: none;
-}
-
-.mySlides.active {
-    display: block;
-} */
 
 .gallery-item {
     display: none;
