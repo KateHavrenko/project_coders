@@ -1,27 +1,29 @@
-// sticky header function
+// Sticky header function
+let stickyHeader = document.querySelector('header');
+window.addEventListener('scroll', function(e) {
+   if (scrollY > 100 ) {
+        stickyHeader.classList.add('sticky');
+   } else {
+    stickyHeader.classList.remove('sticky');
+   }
+})
 
-var stickyHeader = document.querySelector('header');
-
-// window.addEventListener('scroll', function(e) {
-//    if (scrollY > 100 ) {
-//         stickyHeader.classList.add('sticky');
-//    } else {
-//     stickyHeader.classList.remove('sticky');
-//    }
-// })
-
-//smooth moving to anchor
-
+// Smooth moving to anchor
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-
         document.querySelector(this.getAttribute('href')).scrollIntoView({
             behavior: 'smooth',
-            block:    "start" 
+            block:    'start' 
         });
     });
 });
+
+var prev = document.querySelector(".prev");
+var next = document.querySelector(".next");
+next.addEventListener("click", showRightSlide);
+prev.addEventListener("click", showLeftSlide);
+var currentImage = 0;
 
 function getSlides() {
     return document.querySelectorAll('.gallery-item');
@@ -31,56 +33,46 @@ function getDots() {
     return document.querySelectorAll('.dot');
 }
 
-var prev = document.querySelector(".prev");
-var next = document.querySelector(".next");
-next.addEventListener("click", showSlideRight);
-prev.addEventListener("click", showSlideLeft);
-var n = 0;
+updateButtonsVisibility(currentImage);
 
-updateButtonsVisibility(n);
-
-//move to right slide
-
-function showSlideRight() {
-    if (n < getSlides().length - 1) {
-        showSlide(n, n + 1);
-        n++;
+// Move to the right slide
+function showRightSlide() {
+    if (currentImage < getSlides().length - 1) {
+        showSlide(currentImage, currentImage + 1);
+        currentImage++;
     } else {
-        showSlide(n, 0);
-        n = 0;
+        showSlide(currentImage, 0);
+        currentImage = 0;
     }
-    updateButtonsVisibility(n);
+    updateButtonsVisibility(currentImage);
 }
 
-//move to left slide
-
-function showSlideLeft() {
-    if (n == 0) {
+// Move to the left slide
+function showLeftSlide() {
+    if (currentImage == 0) {
        let last = getSlides.length - 1;
        showSlide(0, last);
-       n = last;
+       currentImage = last;
     } else {
-       showSlide(n, n - 1);
-       n--;
+       showSlide(currentImage, currentImage - 1);
+       currentImage--;
     }
-    updateButtonsVisibility(n);
+    updateButtonsVisibility(currentImage);
 }
 
-//switch slide with arrows left/right
-
-function pressArrows(e){
-    key= window.event? event.keyCode: e.keyCode;
+// Switch slide with arrows left/right
+function pressArrows(e) {
+    key = window.event ? event.keyCode : e.keyCode;
     if (key == 37) {
-        showSlideLeft();
-    }    else if (key == 39) {
-        showSlideRight();
+        showLeftSlide();
+    } else if (key == 39) {
+        showRightSlide();
     }
 }
 
 document.onkeydown = pressArrows;
 
-//update navigation arrows
-
+// Update navigation arrows
 function updateButtonsVisibility(active) {
     let slides = getSlides();
     if (slides === undefined) {
@@ -93,14 +85,12 @@ function updateButtonsVisibility(active) {
     }
 }
 
-var idInterval;
-
-
-//slide gallery using conrtols buttons
+// Slide gallery using conrtols buttons
+let idInterval;
 
 document.querySelector('.play').addEventListener('click', function(){
     idInterval = setInterval(function () {
-        showSlideRight();
+        showRightSlide();
     }, 2000);
 })
 
@@ -108,26 +98,26 @@ document.querySelector('.pause').addEventListener('click', function(){
     window.clearInterval(idInterval);
 })
 
-//rendering images using Unsplash API
-
-const galleryContainer = document.querySelector('.gallery-container');
-
+// Rendering images using Unsplash API
+let galleryContainer = document.querySelector('.gallery-container');
 function renderGalleryItem() {
     let baseUrl = 'https://api.unsplash.com/collections/3284053/photos/';
     let accessKey = '3433e42b2d3f41b12c7c502fa3ca1898adc07a08124450e62bcef7564510cffe';
-    let url = `${baseUrl}?client_id=${accessKey}&`;
+    let url = `${baseUrl}?client_id=${accessKey}`;
 
     fetch(url).then((response) => {
         response.json().then(function (data) {
             let imgArray = data;
-            for (let j = 2; j < imgArray.length; j++) {
+            for (let j = 0; j < imgArray.length; j++) {
                 let galleryItem = document.createElement('div');
                 galleryItem.classList.add('gallery-item');
+
                 let img = document.createElement('img');
                 img.classList.add('gallery', 'item');
                 img.src = imgArray[j].urls.full;
+
                 galleryItem.appendChild(img);
-                if (j == 2) {
+                if (j == 0) {
                     galleryItem.classList.add('active');
                 }
                 galleryContainer.appendChild(galleryItem);
@@ -140,7 +130,7 @@ function renderGalleryItem() {
 
 renderGalleryItem();
 
-// create navigations dots
+// Create navigation dots
 function createDots() {
     let numberDots = document.querySelectorAll('.gallery-item');
     for (let i = 0; i < numberDots.length; i++) {
@@ -154,13 +144,12 @@ function createDots() {
     }
 };
 
-//slide gallery with navigations dots
-
+// Slide gallery with navigations dots
 function addButtonListener() { 
     let buttons = document.querySelectorAll('.dot'); 
     let listener = function(e) {
-        showSlide(n, e.target.index);
-        n = e.target.index;
+        showSlide(currentImage, e.target.index);
+        currentImage = e.target.index;
     };
     for (let j = 0; j < buttons.length; j++) { 
         buttons[j].index = j; 
@@ -168,8 +157,7 @@ function addButtonListener() {
     }
 }
 
-//function that switchs slides
-
+// Switchs slides
 function showSlide(prev, next) {
     let slides = getSlides();
     let dots = getDots();
