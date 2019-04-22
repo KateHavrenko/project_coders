@@ -552,6 +552,7 @@ section h2:after {
     #information {
         top: 0px;
         padding-top: 1px;
+        height: auto;
     }
 
     #information .container {
