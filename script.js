@@ -8,6 +8,12 @@ window.addEventListener('scroll', function(e) {
    }
 })
 
+// Show menu (mobile screen)
+let menu = document.getElementById('menu');
+document.getElementById('buttonMenu').addEventListener("click", function() {
+    menu.classList.toggle('active');
+})
+
 // Smooth moving to anchor
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
