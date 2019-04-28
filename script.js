@@ -100,6 +100,7 @@ document.querySelector('.play').addEventListener('click', function(){
     }, 2000);
 })
 
+
 document.querySelector('.pause').addEventListener('click', function(){
     window.clearInterval(idInterval);
 })
@@ -107,7 +108,7 @@ document.querySelector('.pause').addEventListener('click', function(){
 // Rendering images using Unsplash API
 let galleryContainer = document.querySelector('.gallery-container');
 function renderGalleryItem() {
-    let baseUrl = 'https://api.unsplash.com/collections/3284053/photos/';
+    let baseUrl = 'https://api.unsplash.com/collections/4637770/photos/';
     let accessKey = '3433e42b2d3f41b12c7c502fa3ca1898adc07a08124450e62bcef7564510cffe';
     let url = `${baseUrl}?client_id=${accessKey}`;
 
