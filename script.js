@@ -68,7 +68,7 @@ function showLeftSlide() {
 
 // Switch slide with arrows left/right
 function pressArrows(e) {
-    key = window.event ? event.keyCode : e.keyCode;
+    key = e.keyCode;
     if (key == 37) {
         showLeftSlide();
     } else if (key == 39) {
