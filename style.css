@@ -305,12 +305,20 @@ section h2:after {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 5px -85px;
+    object-position: 0 -85px;
 }
 
 #about_me .container .wrapper-photo {
+    border: 4px solid #ffd204;
     cursor: pointer;
     height: 400px;
+    -webkit-transition: 1s ease-in-out;
+    -moz--transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
+}
+
+#about_me .container .wrapper-photo:hover {
+    border: 4px solid #fff;
 }
 
 #about_me .container .wrapper-photo:hover .text {
