@@ -93,16 +93,23 @@ function updateButtonsVisibility(active) {
 
 // Slide gallery using conrtols buttons
 let idInterval;
+let play = document.querySelector('.play');
+let pause = document.querySelector('.pause');
 
-document.querySelector('.play').addEventListener('click', function(){
+play.addEventListener('click', function(){
+    this.classList.add('activeButton');
+    pause.classList.remove('activeButton');
     idInterval = setInterval(function () {
         showRightSlide();
-    }, 2000);
+    }, 3000);
 })
 
+pause.classList.add('activeButton');
 
-document.querySelector('.pause').addEventListener('click', function(){
+pause.addEventListener('click', function(){
     window.clearInterval(idInterval);
+    this.classList.add('activeButton');
+    play.classList.remove('activeButton');
 })
 
 // Rendering images using Unsplash API
