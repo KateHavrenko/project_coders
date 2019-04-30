@@ -244,7 +244,7 @@ section h2:after {
     height: 2px;
     width: 0%;
     -webkit-transition: width .3s ease-in-out;
-    -moz--transition: width .3s ease-in-out;
+    -moz-transition: width .3s ease-in-out;
     transition: width .3s ease-in-out;
 }
 .title-links:hover:after,
@@ -313,7 +313,7 @@ section h2:after {
     cursor: pointer;
     height: 400px;
     -webkit-transition: 1s ease-in-out;
-    -moz--transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
     transition: 1s ease-in-out;
 }
 
