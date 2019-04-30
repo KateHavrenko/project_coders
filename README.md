@@ -18,5 +18,7 @@ Tap this [link](<https://katehavrenko.github.io/project_coders/>) to see website
 
 I used **HTML**, **CSS**, and **Vanilla Javasript**. Also I used **Unsplash API** to generate images to my gallery. 
 
+I've tested my website on computer and smartphone but it works best in Chrome.
+
 
  
